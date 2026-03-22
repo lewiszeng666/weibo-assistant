@@ -29,10 +29,15 @@ bash {baseDir}/scripts/setup.sh
 安装完成后，还需手动配置 OpenClaw：
 
 ```bash
-# 启用浏览器（编辑 ~/.openclaw/openclaw.json，添加 browser 配置）
+# 启用浏览器（headless 无头模式，适用于无桌面的服务器）
 openclaw config set browser.enabled true
 openclaw config set browser.headless true
 openclaw config set browser.noSandbox true
+
+# 设置默认 profile 为 openclaw（非 Chrome 扩展模式）
+openclaw config set browser.defaultProfile openclaw
+openclaw config set browser.profiles.openclaw.color "#4A90D9"
+openclaw config set browser.profiles.openclaw.cdpPort 18800
 
 # 切换到 full 工具集（coding 模式不包含 browser 工具）
 openclaw config set tools.profile full
