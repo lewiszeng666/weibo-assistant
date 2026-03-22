@@ -53,7 +53,8 @@ install_system_deps() {
 
     # 检测包管理器
     if check_command apt-get; then
-        sudo apt-get update -qq
+        # apt-get update 允许部分源失败（如失效的 PPA），不阻塞安装流程
+        sudo apt-get update -qq 2>&1 || warn "apt-get update 部分源失败（不影响安装，可稍后手动清理失效的 PPA）"
         sudo apt-get install -y -qq \
             libnss3 libatk1.0-0t64 libatk-bridge2.0-0t64 libcups2t64 \
             libxcomposite1 libxrandr2 libgbm1 libpango-1.0-0 \
